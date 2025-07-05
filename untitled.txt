@@ -49,3 +49,9 @@
   const app = firebase.initializeApp(firebaseConfig);
   const db = firebase.firestore();
 </script>
+<h2>🛠️ Add a Tool</h2>
+<form id="toolForm">
+  <input type="text" id="toolName" placeholder="Tool Name" required>
+  <input type="text" id="toolCategory" placeholder="Category">
+  <button type="submit">Save</button>
+</form>
