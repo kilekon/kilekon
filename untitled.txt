@@ -55,3 +55,22 @@
   <input type="text" id="toolCategory" placeholder="Category">
   <button type="submit">Save</button>
 </form>
+<script>
+  const form = document.getElementById("toolForm");
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const name = document.getElementById("toolName").value;
+    const category = document.getElementById("toolCategory").value;
+
+    db.collection("tools").add({
+      name: name,
+      category: category,
+      timestamp: new Date()
+    }).then(() => {
+      alert("Tool saved!");
+      form.reset();
+    }).catch((error) => {
+      alert("Error saving tool: " + error.message);
+    });
+  });
+</script>
