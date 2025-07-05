@@ -1,0 +1,37 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html>
+<head>
+  <title>My First Site</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <h1>Welcome to My Website</h1>
+  <p>This is my mobile-coded project!</p>
+</body>
+</html>
+<head><link rel="stylesheet" href="style.css" /><body>
+  <h1>Welcome to My Website</h1>
+  <p>This is my mobile-coded project!</p>
+
+  <hr />
+
+  <section id="about">
+    <h2>About Me</h2>
+    <p>I'm Charles, an ICT technician exploring web development, e-commerce, and technology integration.</p>
+  </section>
+
+  <section id="projects">
+    <h2>Projects</h2>
+    <ul>
+      <li>🔧 Remote device control using Vysor/Scrcpy</li>
+      <li>🌐 Douyin Mall merchant services exploration</li>
+      <li>📡 API integration with Meta Business tools</li>
+    </ul>
+  </section>
+
+  <section id="contact">
+    <h2>Contact Me</h2>
+    <p>Email: <a href="mailto:charleskilekon6.com">charleskilekon6@example.com</a></p>
+  </section>
+</body>
