@@ -76,3 +76,16 @@
 </script>
 <h3>🧰 My Tools</h3>
 <ul id="toolList"></ul>
+<script>
+  db.collection("tools").orderBy("timestamp", "desc").onSnapshot((snapshot) => {
+    const toolList = document.getElementById("toolList");
+    toolList.innerHTML = ""; // Clear list before updating
+
+    snapshot.forEach((doc) => {
+      const data = doc.data();
+      const li = document.createElement("li");
+      li.textContent = `${data.name} — ${data.category}`;
+      toolList.appendChild(li);
+    });
+  });
+</script>
