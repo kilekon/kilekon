@@ -308,3 +308,133 @@ const firebaseConfig = {
   </script>
 </body>
 </html>
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Kilekon Tools</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      max-width: 600px;
+      margin: auto;
+      padding: 2rem;
+      background-color: #f0f0f0;
+    }
+    input, button {
+      padding: 10px;
+      margin: 5px 0;
+      width: 100%;
+    }
+    button {
+      background: #4CAF50;
+      color: white;
+      border: none;
+      font-weight: bold;
+    }
+    ul {
+      padding-left: 0;
+    }
+    li {
+      list-style: none;
+      background: white;
+      padding: 10px;
+      margin-bottom: 6px;
+      border-radius: 4px;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+    }
+  </style>
+</head>
+<body>
+  <h2>🛠️ Add a Tool</h2>
+  <form id="toolForm">
+    <input type="text" id="toolName" placeholder="Tool Name" required>
+    <input type="text" id="toolCategory" placeholder="Category">
+    <button type="submit">Save Tool</button>
+  </form>
+
+  <h3>🧰 My Tools</h3>
+  <ul id="toolList"></ul>
+
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/10.3.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.3.1/firebase-firestore.js"></script>
+
+  <!-- Firebase Config -->
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyBLbhTskgb9aqUHRNvRVApYza2cHjV2_KM",
+      authDomain: "charles-db-fdf24.firebaseapp.com",
+      projectId: "charles-db-fdf24",
+      storageBucket: "charles-db-fdf24.firebasestorage.app",
+      messagingSenderId: "1018425253760",
+      appId: "1:1018425253760:web:1d69ab0f64cfcf92532b65",
+      measurementId: "G-QCGWTDC0EC"
+    };
+
+    const app = firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+  </script>
+
+  <!-- Form Submit Script -->
+  <script>
+    document.getElementById("toolForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      const name = document.getElementById("toolName").value;
+      const category = document.getElementById("toolCategory").value;
+
+      db.collection("tools").add({
+        name,
+        category,
+        timestamp: new Date()
+      }).then(() => {
+        alert("✅ Tool saved!");
+        this.reset();
+      }).catch((error) => {
+        alert("❌ Failed: " + error.message);
+      });
+    });
+  </script>
+
+  <!-- Fetch and Display Tools -->
+  <script>
+    db.collection("tools").orderBy("timestamp", "desc").onSnapshot(snapshot => {
+      const list = document = firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+  </script>
+
+  <!-- Form Submit Script -->
+  <script>
+    document.getElementById("toolForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      const name = document.getElementById("toolName").value;
+      const category = document.getElementById("toolCategory").value;
+
+      db.collection("tools").add({
+        name,
+        category,
+        timestamp: new Date()
+      }).then(() => {
+        alert("✅ Tool saved!");
+        this.reset();
+      }).catch((error) => {
+        alert("❌ Failed: " + error.message);
+      });
+    });
+  </script>
+
+  <!-- Fetch and Display Tools -->
+  <script>
+    db.collection("tools").orderBy("timestamp", "desc").onSnapshot(snapshot => {
+      const list = document.getElementById("toolList");
+      list.innerHTML = "";
+      snapshot.forEach(doc => {
+        const tool = doc.data();
+        const li = document.createElement("li");
+        li.textContent = `${tool.name} — ${tool.category}`;
+        list.appendChild(li);
+      });
+    });
+  </script>
+</body>
+</html>
