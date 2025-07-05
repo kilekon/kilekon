@@ -63,6 +63,16 @@
   <h1>Welcome to My Website</h1>
   <p>This is my mobile-coded project!</p>
 </body>
+<script>
+  // Test Firebase connection
+  window.onload = () => {
+    if (firebase.apps.length > 0) {
+      alert("✅ Firebase is connected!");
+    } else {
+      alert("❌ Firebase failed to load.");
+    }
+  };
+</script>
 </html>
 <head><link rel="stylesheet" href="style.css" /><body>
   <h1>Welcome to My Website</h1>
