@@ -202,3 +202,109 @@ const firebaseConfig = {
   appId: "1:1018425253760:web:1d69ab0f64cfcf92532b65",
   measurementId: "G-QCGWTDC0EC"
 };
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Kilekon Tools</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      padding: 2rem;
+      background: #f9f9f9;
+    }
+    h2, h3 {
+      color: #333;
+    }
+    input, button {
+      padding: 0.5rem;
+      margin: 0.25rem 0;
+      width: 100%;
+      max-width: 400px;
+    }
+    button {
+      background: #4CAF50;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    ul {
+      list-style-type: none;
+      padding-left: 0;
+    }
+    li {
+      background: #fff;
+      padding: 0.5rem;
+      margin: 0.25rem 0;
+      border-radius: 5px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+  </style>
+</head>
+<body>
+  <h2>🛠️ Add a Tool</h2>
+  <form id="toolForm">
+    <input type="text" id="toolName" placeholder="Tool Name" required />
+    <input type="text" id="toolCategory" placeholder="Category" />
+    <button type="submit">Save Tool</button>
+  </form>
+
+  <h3>🧰 My Tools</h3>
+  <ul id="toolList"></ul>
+
+  <!-- Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/10.3.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.3.1/firebase-firestore.js"></script>
+
+  <!-- Your Firebase Config -->
+  <script>
+    const firebaseConfig = {
+      apiKey: "YOUR_API_KEY",
+      authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
+      projectId: "YOUR_PROJECT_ID",
+      storageBucket: "YOUR_PROJECT_ID.appspot.com",
+      messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+      appId: "YOUR_APP_ID"
+    };
+
+    const app = firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+  </script>
+
+  <!-- Form Submission Script -->
+  <script>
+    const form = document.getElementById("toolForm");
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const name = document.getElementById("toolName").value;
+      const category = document.getElementById("toolCategory").value;
+
+      db.collection("tools").add({
+        name,
+        category,
+        timestamp: new Date()
+      }).then(() => {
+        alert("✅ Tool saved!");
+        form.reset();
+      }).catch((error) => {
+        alert("❌ Failed to save: " + error.message);
+      });
+    });
+  </script>
+
+  <!-- Fetch & Display Tools -->
+  <script>
+    db.collection("tools").orderBy("timestamp", "desc").onSnapshot(snapshot => {
+      const toolList = document.getElementById("toolList");
+      toolList.innerHTML = "";
+
+      snapshot.forEach(doc => {
+        const data = doc.data();
+        const li = document.createElement("li");
+        li.textContent = `${data.name} — ${data.category}`;
+        toolList.appendChild(li);
+      });
+    });
+  </script>
+</body>
+</html>
