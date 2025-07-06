@@ -545,3 +545,4 @@ const firebaseConfig = {
 </html>
 untitled.txt
 index.html
+Rename file to index.html for GitHub Pages
